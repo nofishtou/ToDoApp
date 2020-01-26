@@ -50,7 +50,12 @@ export default class TODO {
           }
         })
           .then(res => res.json())
-          .then(this.update());
+          .then(
+            // wait till server update list
+            setTimeout(() => (
+               this.update()
+            ), 1000)   
+          );
          
           this.form.getRef('add-input').input.value = '';
       }
