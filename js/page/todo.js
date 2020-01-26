@@ -50,7 +50,6 @@ export default class TODO {
           }
         })
           .then(res => res.json())
-          .catch(err => console.log(err))
           .then(this.update());
          
           this.form.getRef('add-input').input.value = '';
@@ -137,7 +136,14 @@ export default class TODO {
         'Authorization': localStorage.getItem('token'),
       }
     })
-      .then(res => res.json())
+      .then(res => {
+          // reupdate list if cached
+          if(res.status === 304) {
+            this.update()
+          }
+          return res.json()
+        }
+      )
       .then(data => {
         store.setData(data)
         this.list.render(store.getData())
