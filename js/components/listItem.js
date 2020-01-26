@@ -29,8 +29,9 @@ export default function listItemComp () {
       if(inf.completed === true){
         checkbox.input.disabled = true;
         input.input.disabled = true;
-        btn.button.disabled = true;
-
+        btn.addEvent('click', () => {
+          callbacks.delete(btn.getId());
+        }, false)
       } else {
         btn.addEvent('click', () => {
           callbacks.delete(btn.getId());
