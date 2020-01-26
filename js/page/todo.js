@@ -50,6 +50,7 @@ export default class TODO {
           }
         })
           .then(res => res.json())
+          .catch(err => console.log(err))
           .then(this.update());
          
           this.form.getRef('add-input').input.value = '';
